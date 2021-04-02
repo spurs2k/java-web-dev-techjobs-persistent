@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.launchcode.javawebdevtechjobspersistent.models.JobData;
 import java.util.HashMap;
 
-/**
- * Created by LaunchCode
- */
+
 @Controller
 @RequestMapping(value = "list")
 public class ListController {
@@ -23,10 +21,10 @@ public class ListController {
     private JobRepository jobRepository;
 
     @Autowired
-    private EmployerRepository employerRepository;
+    private SkillRepository skillRepository;
 
     @Autowired
-    private SkillRepository skillRepository;
+    private EmployerRepository employerRepository;
 
     static HashMap<String, String> columnChoices = new HashMap<>();
 
@@ -46,7 +44,8 @@ public class ListController {
     }
 
     @RequestMapping(value = "jobs")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+    public String listJobsByColumnAndValue(Model model, @RequestParam String column,
+                                           @RequestParam String value) {
         Iterable<Job> jobs;
         if (column.toLowerCase().equals("all")){
             jobs = jobRepository.findAll();
